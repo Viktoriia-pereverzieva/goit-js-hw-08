@@ -98,6 +98,21 @@ ulElem.addEventListener('click', e => {
     const liElem = e.target.closest(".js-gallery-item");
     if (!liElem) return;
 
-    const atribData = liElem.querySelector(".js-gallery-image");
-    console.log(atribData.dataset.source);
+  const atribData = liElem.querySelector(".js-gallery-image");
+  const atribElem = atribData.dataset.source;
+
+  const instance = basicLightbox.create(`
+    <img src="${atribElem}" width="800" height="600">
+`)
+
+  instance.show()
+  window.addEventListener('keydown', handleCloseModal);
+
+  function handleCloseModal (e) {
+    if (e.code === "Escape") {
+      instance.close()
+    };
+  };
 });
+
+
