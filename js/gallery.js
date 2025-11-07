@@ -87,19 +87,13 @@ function imagesTemplate(arr) {
 const markup = imagesTemplate(images);
 ulElem.innerHTML = markup;
 
-ulElem.addEventListener("click", event => {
-const clickAElem = event.target.closest(".js-gallery-link")
-    if (!clickAElem) return;
-        event.preventDefault();
-});
+ulElem.addEventListener("click", e => {
+  e.preventDefault();
+  
+    const imgElem = e.target.closest(".js-gallery-image");
+    if (!imgElem) return;
 
-ulElem.addEventListener('click', e => {
-    e.preventDefault();
-    const liElem = e.target.closest(".js-gallery-item");
-    if (!liElem) return;
-
-  const atribData = liElem.querySelector(".js-gallery-image");
-  const atribElem = atribData.dataset.source;
+  const atribElem = imgElem.dataset.source;
 
   const instance = basicLightbox.create(`
     <img src="${atribElem}" width="800" height="600">
@@ -111,8 +105,11 @@ ulElem.addEventListener('click', e => {
   function handleCloseModal (e) {
     if (e.code === "Escape") {
       instance.close()
+      window.removeEventListener('keydown', handleCloseModal);
     };
   };
+
+  
 });
 
 
