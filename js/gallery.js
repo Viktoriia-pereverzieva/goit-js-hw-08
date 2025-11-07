@@ -108,7 +108,6 @@ ulElem.addEventListener("click", e => {
       window.removeEventListener('keydown', handleCloseModal);
     };
   };
-
   
 });
 
